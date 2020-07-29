@@ -14,20 +14,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.edu.dao.IF_ReplyDAO">
-	<select id="selectReply" resultType="org.edu.vo.ReplyVO">
-		select * from tbl_reply where bno = #{bno} 
-		order by regdate desc
-		limit #{pageVO.startNo},#{pageVO.perPageNum}
+	<select id="selectReply" resultType="org.edu.vo.ReplyVO">	
+	<![CDATA[
+	SELECT T_Z.*
+	FROM
+    	(
+    	SELECT ROWNUM AS RNUM , T_A.*
+   		FROM 
+    		(SELECT * FROM TBL_REPLY 
+    		WHERE
+    		bno = #{bno}
+    		ORDER BY regdate  DESC) T_A
+    	WHERE ROWNUM <= (#{pageVO.startNo}/#{pageVO.perPageNum}+1)*#{pageVO.perPageNum}
+   	 	)T_Z
+	WHERE 
+    	T_Z.RNUM > (#{pageVO.startNo}/#{pageVO.perPageNum}) *#{pageVO.perPageNum};
+	]]>
 	</select>
 	<!-- 댓글 넘버 총댓글 개수 -->
 	<select id="countRno" resultType="int">
 		select count(*) from tbl_reply where bno= #{bno}
 	</select>
+	<!-- Auto Increment 기능 대체 오라클용 시퀀스 SEQ_RNO.nextval -->
 	<insert id="insertReply">
+		<selectKey keyProperty="rno" resultType="int" order="BEFORE">
+				SELECT SEQ_RNO.nextval FROM DUAL
+		</selectKey>
 		insert into tbl_reply (
-		bno,replytext,replyer,regdate )
+		rno,bno,replytext,replyer,regdate )
 		values(
-		#{bno},#{replytext},#{replyer},now() )
+		#{rno},#{bno},#{replytext},#{replyer},now() )
 	</insert>
 	<update id="updateReply">
 		update tbl_reply set 

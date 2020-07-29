@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardServiceImpl implements IF_BoardService {
 	@Inject
 	private IF_BoardDAO boardDAO;
+	
 	@Transactional
 	@Override
 	public void insertBoard(BoardVO boardVO) throws Exception {
@@ -47,8 +48,8 @@ public class BoardServiceImpl implements IF_BoardService {
 	@Transactional
 	@Override
 	public void deleteBoard(Integer bno) throws Exception {
+		boardDAO.deleteBoardReply(bno);
 		boardDAO.deleteAttach(bno);
-	// attach가 밑에있으면 삭제가 안되는이유:	
 		boardDAO.deleteBoard(bno);
 		
 	}

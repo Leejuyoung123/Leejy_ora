@@ -62,7 +62,7 @@ public class DataSourceTest {
 		System.out.println("회원 리스트 입니다");
 		
 		PageVO pageVO =new PageVO();
-		pageVO.setPage(1);
+
 		pageVO.setPerPageNum(10);
 		memberService.selectMember(pageVO);
 		List<MemberVO> list = memberService.selectMember(pageVO);
@@ -75,7 +75,7 @@ public class DataSourceTest {
 		}
 		@Test
 		public void testUpdateMember() throws Exception{
-		//memberVO를 사용하기위해 클래스변수를 생성
+		//memberVO를 사용하기위해 클래스변수를    생성
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUser_id("user02");
 		memberVO.setUser_pw("1234");

@@ -80,4 +80,9 @@ public class BoardDAOImpl implements IF_BoardDAO {
 		sqlSession.selectOne(mapperQuery + ".updateViewCount" , bno);
 	}
 
+	@Override
+	public void deleteBoardReply(Integer bno) throws Exception {
+		sqlSession.delete(mapperQuery + ".deleteBoardReply", bno);
+	}
+
 }

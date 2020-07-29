@@ -6,6 +6,7 @@ import org.edu.vo.BoardVO;
 import org.edu.vo.PageVO;
 
 public interface IF_BoardDAO {
+		 public void deleteBoardReply(Integer bno) throws Exception;
 		 public void insertBoard(BoardVO boardVO) throws Exception;
 		 public List<BoardVO> selectBoard(PageVO pageVO)throws Exception;
 		 public void updateBoard(BoardVO boardVO) throws Exception;
