@@ -28,19 +28,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into tbl_member
 		(user_id,user_pw,user_name,email,point,enabled,levels,reg_date)
 		values
-		(#{user_id},#{user_pw},#{user_name},#{email},#{point},#{enabled},#{levels},now())
+		(#{user_id},#{user_pw},#{user_name},#{email},#{point},#{enabled},#{levels},sysdate)
 	</insert>
 	
 	<select id="selectMember" resultType="org.edu.vo.MemberVO">
 		<![CDATA[
-		SELECT Table_Z.*
+		SELECT T_Z.*
 		FROM (
-		SELECT ROWNUM AS RNUM, TABLE_A.*
-		FROM
-		(SELECT * FROM TBL_MEMBER) TABLE_A
-		WHERE ROWNUM <= (0/10+1)*10
-		)TABLE_Z
-		WHERE TABLE_Z.RNUM > (0/10)*10
+            SELECT ROWNUM AS RNUM, T_A.*
+            FROM
+            	(SELECT * FROM TBL_MEMBER 
+             	WHERE 1=1
+        ]]>
+        	<include refid="sqlWhere"></include>
+        <![CDATA[    
+             	ORDER BY REG_DATE DESC) T_A
+		WHERE ROWNUM <= (#{startNo}/#{perPageNum}+1)*#{perPageNum}
+            )T_Z
+		WHERE T_Z.RNUM > (#{startNo}/#{perPageNum})*#{perPageNum}
 		]]>
 	</select>
 
@@ -61,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		enabled =
 		#{enabled},
 		levels = #{levels},
-		update_date = now()
+		update_date = sysdate 
 		where user_id = #{user_id}
 
 	</update>

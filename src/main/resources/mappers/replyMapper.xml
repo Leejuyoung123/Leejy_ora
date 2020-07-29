@@ -43,12 +43,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into tbl_reply (
 		rno,bno,replytext,replyer,regdate )
 		values(
-		#{rno},#{bno},#{replytext},#{replyer},now() )
+		#{rno},#{bno},#{replytext},#{replyer},sysdate )
 	</insert>
 	<update id="updateReply">
 		update tbl_reply set 
 		replytext = #{replytext},
-		update_date = now()
+		update_date = sysdate
 		where rno = #{rno}
 	</update>
 	<delete id="deleteReply">
