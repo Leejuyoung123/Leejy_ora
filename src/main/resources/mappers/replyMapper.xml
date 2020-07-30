@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-	  Mapper 인터페이스를 이용하는 또 다른 장점은 기존의 XML 을
-	   그대로 사용할 수 있음.
-	   이때 두가지 규칙이 있음.
-	   1. Mapper 인터페이스 이름과 XML Mapper 의 네임스페이스를 반드시
-		  일치시킬 것.
-	   2. Mapper 인터페이스의 메서드 이름과 XML 의 id 를 반드시 일치시킴.
-	   root-context.xml :: sqlSessionFactory 에 매퍼 xml 파일의 경로를 인식하게 함.
--->
+<!-- Mapper 인터페이스를 이용하는 또 다른 장점은 기존의 XML 을 그대로 사용할 수 있음. 이때 두가지 규칙이 있음. 1. 
+	Mapper 인터페이스 이름과 XML Mapper 의 네임스페이스를 반드시 일치시킬 것. 2. Mapper 인터페이스의 메서드 이름과 
+	XML 의 id 를 반드시 일치시킴. root-context.xml :: sqlSessionFactory 에 매퍼 xml 파일의 경로를 
+	인식하게 함. -->
 
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -28,17 +23,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	WHERE ROWNUM <= (#{pageVO.startNo}/#{pageVO.perPageNum}+1)*#{pageVO.perPageNum}
    	 	)T_Z
 	WHERE 
-    	T_Z.RNUM > (#{pageVO.startNo}/#{pageVO.perPageNum}) *#{pageVO.perPageNum};
+    	T_Z.RNUM > (#{pageVO.startNo}/#{pageVO.perPageNum}) *#{pageVO.perPageNum}
 	]]>
 	</select>
 	<!-- 댓글 넘버 총댓글 개수 -->
 	<select id="countRno" resultType="int">
-		select count(*) from tbl_reply where bno= #{bno}
+		select count(*) from tbl_reply
+		where bno= #{bno}
 	</select>
 	<!-- Auto Increment 기능 대체 오라클용 시퀀스 SEQ_RNO.nextval -->
 	<insert id="insertReply">
 		<selectKey keyProperty="rno" resultType="int" order="BEFORE">
-				SELECT SEQ_RNO.nextval FROM DUAL
+			SELECT SEQ_RNO.nextval FROM DUAL
 		</selectKey>
 		insert into tbl_reply (
 		rno,bno,replytext,replyer,regdate )
@@ -46,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{rno},#{bno},#{replytext},#{replyer},sysdate )
 	</insert>
 	<update id="updateReply">
-		update tbl_reply set 
+		update tbl_reply set
 		replytext = #{replytext},
 		update_date = sysdate
 		where rno = #{rno}

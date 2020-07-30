@@ -15,12 +15,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="sqlWhere">
 		<if test="searchType !=null">
 			AND (
-			user_id LIKE CONCAT('%',#{searchKeyword},'%')
+			user_id LIKE '%' || #{searchKeyword} ||'%'
 			OR
-			user_name LIKE CONCAT('%',#{searchKeyword},'%')
+			user_name
+			LIKE '%' || #{searchKeyword} || '%'
 			OR
 			email LIKE
-			CONCAT('%',#{searchKeyword},'%')
+			'%' || #{searchKeyword} ||'%')
 			)
 		</if>
 	</sql>

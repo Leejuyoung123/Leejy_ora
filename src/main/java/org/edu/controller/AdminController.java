@@ -59,6 +59,7 @@ public class AdminController {
 	public String boardList(@ModelAttribute("pageVO") PageVO pageVO, Locale locale, Model model) throws Exception {
 		//PageVO pageVO = new PageVO();//매개변수로 받기전 테스트용
 		if(pageVO.getPage() == null) {
+			
 			pageVO.setPage(1);//초기 page변수값 지정
 		}
 		pageVO.setPerPageNum(10);//1페이지당 보여줄 게시물 수 강제지정

@@ -53,7 +53,7 @@
 			<!-- pagination -->
 			<div class="pagination">
 			<c:if test="${pageVO.prev}">
-				<a href=/board/list?page=${pageVO.startPage -1}&searchType=${pageVO.searchType}&searchKeyword=${pageVO.searchKeyword}" class="prevpage pbtn"> <img src="/resources/home/img/btn_prevpage.png" alt="이전 페이지로 이동"></a>
+				<a href="/board/list?page=${pageVO.startPage -1}&searchType=${pageVO.searchType}&searchKeyword=${pageVO.searchKeyword}" class="prevpage pbtn"> <img src="/resources/home/img/btn_prevpage.png" alt="이전 페이지로 이동"></a>
 			</c:if>
 			<c:forEach begin="${pageVO.startPage}" end="${pageVO.endPage}" var="idx">
 					<a href="/board/list?page=${idx}&searchType=${pageVO.searchType}&searchKeyword=${pageVO.searchKeyword}"><span class='pagenum <c:out value="${idx == pageVO.page?'currentpage':''}"/>'>${idx}</span></a>

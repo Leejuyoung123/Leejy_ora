@@ -77,7 +77,7 @@ if('${msg}'  !=  ""){
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">User02 <span
+						<a href="#" class="d-block">${session_username}님<span
 							class="right badge badge-danger">Online</span>
 						</a>
 					</div>
@@ -87,29 +87,63 @@ if('${msg}'  !=  ""){
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column"
 						data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item"><a href="/" class="nav-link"> <i
-								class="nav-icon fas fa-th"></i>
-								<p>사용자 홈</p>
-						</a></li>
-						<li class="nav-item has-treeview menu-open"><a href="#"
-							class="nav-link active"> <i
-								class="nav-icon fas fa-tachometer-alt"></i>
+					 	<li class="nav-item">
+							<a href="/" class="nav-link"> 
+								<i class="nav-icon fas fa-th"></i>
+									<p>사용자 홈</p>
+							</a>
+						</li>
+						
+						<li class="nav-item has-treeview menu-open">
+							<a href="#" class="nav-link active"> 
+						 		<i class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
 									대시보드 <i class="right fas fa-angle-left"></i>
-								</p>
-						</a>
+							   </p>
+							</a>
+							
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="/admin/member/list"
-									class="nav-link "> <i class="far fa-circle nav-icon"></i>
-										<p>회원관리</p>
+								<li class="nav-item">
+								<a href="/admin/member/list" class="nav-link "> 
+								<i class="far fa-circle nav-icon"></i>
+									<p>회원관리</p>
 								</a></li>
-								<li class="nav-item"><a href="/admin/board/list"
-									class="nav-link"> <i class="far fa-circle nav-icon"></i>
-										<p>게시판관리</p>
-								</a></li>
-							</ul></li>
-					</ul>
-				</nav>
+							
+						
+							
+							<li class="nav-item has-treeview menu-open">
+								<li class="nav-item">
+								<a href="#"class="nav-link"> 
+								<i class="far fa-circle nav-icon"></i>
+									<p>
+										게시판관리	<i class="right fas fa-angle-left"></i>
+									</p>
+								</a>
+							
+							<ul class="nav nav-treeview">
+						        <li class="nav-item">
+						        	<a href="/admin/board/list?searchBoard=notice" class="nav-link">
+						        		<i class="far fa-circle nav-icon"></i>
+						                  <p>공지사항</p>
+						        	</a>
+						        </li>
+						        
+						        <li class="nav-item">
+						            <a href="/admin/board/list?searchBoard=gallery" class="nav-link">
+						                <i class="far fa-circle nav-icon"></i>
+						                  <p>갤러리</p>
+						            </a>
+						        </li>
+						        
+					   	</ul>
+					   	<!-- 공지사항 갤러리 영역 -->
+					   </ul>
+					   	<!-- 회원관리 게시판 영역 -->     
+						</li>
+						<!-- 대시보드 li -->
+						</ul>
+						<!-- 슬라이드바 ul-->
+						</nav>
 				<!-- /.sidebar-menu -->
 			</div>
 			<!-- /.sidebar -->
