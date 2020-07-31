@@ -31,16 +31,26 @@
 				<!-- general form elements disabled -->
 				<div class="card card-primary">
 					<div class="card-header" style="padding-top: 0px;">
-						<h3 class="card-title"></h3>
+						<h2 class="card-title">UPDATE BOARD</h2>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
 						<form role="form" action="/admin/board/update" method="post" encType="multipart/form-data">
 							<div class="row">
 								<div class="col-sm-12">
+								<!-- select option -->
+								<div class="form-group">
+									<label>게시판 선택</label> 
+									<select name="bod_type" class="form-control" required>
+										<option value="">게시판선택</option>
+										<option value="notice"<c:out value="${(boardVO.bod_type eq 'notice')?('selected'):('')}"/>>공지사항</option>
+										<option value="gallery"<c:out value="${(boardVO.bod_type eq 'gallery')?('selected'):('')}"/>>갤러리</option>
+									</select>
+								</div>
+								</div>
+								<div class="col-sm-12">
 									<!-- text input -->
 									<div class="form-group">
-										<h3>UPDATE Board</h3>
 										<div class="form-group">
 											<label for="exampleTitle">Title</label> <input  value="${boardVO.title}" type="text"
 												name="title" class="form-control" id="exampleTitle"

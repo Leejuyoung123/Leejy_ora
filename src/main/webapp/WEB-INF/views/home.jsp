@@ -87,13 +87,13 @@
 	<!-- about_area -->
 	<div class="about_area">
 		<h2>
-			OOOO OOOOO 스프링 <b>TOP 3</b>
+			<a href="/board/list?searchBoard=gallery">gallery 게시판</a> <b>TOP 3</b>
 		</h2>
 		<div class="about_box">
 			<ul class="place_list box_inner clear">
-				<c:forEach items="${boardList}" var="boardVO" varStatus="status">
+				<c:forEach items="${boardListGallery}" var="boardVO" varStatus="status">
 					<c:if test="${status.count <= 3}">
-						<li><a href="/board/view?bno=${boardVO.bno}&page=1"> 
+						<li><a href="/board/view?bno=${boardVO.bno}&page=1&searchBoard=gallery"> 
 						<!-- 첨부파일이 있을때 if -->
 								<c:if test="${boardVO.files[0] != null }">
 									<c:set var="extName" value="${fn:split(boardVO.files[0],'.')}" />
@@ -137,11 +137,11 @@
 			</p>
 			<div class="bbs_line">
 				<h3>
-					<a href="/board/list">NOTICE</a>
+					<a href="/board/list?searchBoard=notice">공지사항</a>
 				</h3>
 				<ul class="notice_recent">
-					<c:forEach items="${boardList}" var="boardVO" varStatus="status">
-						<li><a href="/board/view?bno=${boardVO.bno}&page=1">${boardVO.title}</a></li>
+					<c:forEach items="${boardListNotice}" var="boardVO" varStatus="status">
+						<li><a href="/board/view?bno=${boardVO.bno}&page=1&searchBoard=notice">${boardVO.title}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
