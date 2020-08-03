@@ -67,8 +67,11 @@ if('${msg}'  !=  ""){
 				<li><a href="/board/list?searchboard=" class="openAll2">고객센터</a>
 			         <div class="gnb_depth gnb_depth2_2">
                            <ul class="submenu_list">
-                               <li><a href="/board/list?searchBoard=notice">공지사항</a></li>
-                               <li><a href="/board/list?searchBoard=gallery">갤러리</a></li>
+                           <c:forEach items="${boardTypeMenu}" var="boardTypeMenu">
+                            	<li><a href="/board/list?searchBoard=${boardTypeMenu.bod_type}">${boardTypeMenu.bod_name }</a></li>
+                            <!--    
+                               <li><a href="/board/list?searchBoard=gallery">갤러리</a></li> -->
+                           </c:forEach>
                            </ul>
                      </div>
 				</li>

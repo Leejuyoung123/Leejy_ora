@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.edu.vo.BoardTypeVO;
 import org.edu.vo.BoardVO;
 import org.edu.vo.PageVO;
 import org.springframework.stereotype.Repository;
@@ -91,6 +92,26 @@ public class BoardDAOImpl implements IF_BoardDAO {
 	@Override
 	public int selectTopBno() throws Exception {
 		return sqlSession.selectOne(mapperQuery+".selectTopBno");
+	}
+
+	@Override
+	public List<BoardTypeVO> selectBoardType() throws Exception {
+		return sqlSession.selectList(mapperQuery+".selectBoardType");
+	}
+
+	@Override
+	public void insertBoardType(BoardTypeVO boardTypeVO) throws Exception {
+			sqlSession.insert(mapperQuery +".insertBoardType" , boardTypeVO);
+	}
+
+	@Override
+	public void updateBoardType(BoardTypeVO boardTypeVO) throws Exception {
+		sqlSession.update(mapperQuery + ".updateBoardType" , boardTypeVO);
+	}
+
+	@Override
+	public void deleteBoardType(String bod_type) throws Exception {
+		sqlSession.delete(mapperQuery+ ".deleteBoardType" , bod_type);
 	}
 
 }

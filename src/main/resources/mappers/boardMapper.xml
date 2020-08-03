@@ -17,10 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			title LIKE '%'|| #{searchKeyword} ||'%'
 			OR
 			content
-			LIKE '%' || #{searchKeyword} ||'%'
+			LIKE
+			'%' || #{searchKeyword} ||'%'
 			OR
 			writer LIKE
-				 '%' || #{searchKeyword} ||'%'
+			'%' || #{searchKeyword} ||'%'
 			)
 		</if>
 		<if test="searchBoard !=null and !searchBoard.equals('')">
@@ -36,7 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- mybatis 오라클용 추가 -->
 	<insert id="insertBoard">
 		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
-			SELECT SEQ_BNO.nextval FROM DUAL
+			SELECT
+			SEQ_BNO.nextval FROM DUAL
 		</selectKey>
 		insert into tbl_board
 		(bno,title,content,writer,regdate,view_count,reply_count,bod_type)
@@ -53,8 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				FROM
 				(SELECT * FROM TBL_BOARD
 				WHERE 1=1
-		]]>		
-				<include refid="sqlWhere"></include>
+		]]>
+		<include refid="sqlWhere"></include>
 		<![CDATA[	
 			ORDER BY BNO DESC
 			) T_A
@@ -93,41 +95,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 첨부파일 MySQL용 <insert id="insertAttach"> insert into tbl_attach(full_name, 
 		bno) values (#{fullname},LAST_INSERT_ID()) </insert> -->
-	<!-- 첨부파일 HSql용 
-	<insert id="insertAttach">
-		insert into tbl_attach(full_name, bno) values (#{fullname}, (select top 1
-		bno from tbl_board order by bno desc) )
-	</insert>
-	-->
+	<!-- 첨부파일 HSql용 <insert id="insertAttach"> insert into tbl_attach(full_name, 
+		bno) values (#{fullname}, (select top 1 bno from tbl_board order by bno desc) 
+		) </insert> -->
 	<!-- 첨부파일 oracle 에서 사용되는 최근게시물 번호 -->
 	<select id="selectTopBno" resultType="int">
-		select bno from ( 
-			select bno from tbl_board order by bno desc
+		select bno from (
+		select bno from tbl_board order by bno desc
 		)T_A
 		where ROWNUM = 1
 	</select>
-	 
-	 <!-- 첨부파일 Oracle용 -->
+
+	<!-- 첨부파일 Oracle용 -->
 	<insert id="insertAttach">
-	insert into tbl_attach(full_name, bno) values ( #{fullName},#{bno} )
-	</insert> 
-	 
+		insert into tbl_attach(full_name, bno) values ( #{fullName},#{bno} )
+	</insert>
+
 	<select id="selectAttach" resultType="string">
-		select full_name from tbl_attach where bno = #{bno} order by regdate
+		select full_name from
+		tbl_attach where bno = #{bno} order by regdate
 	</select>
 	<delete id="deleteAttach">
 		delete from tbl_attach where bno = #{bno}
 	</delete>
 	<update id="updateAttach">
-		insert into tbl_attach(full_name, bno) values ( #{fullName} ,#{bno} )
+		insert into tbl_attach(full_name, bno) values (
+		#{fullName} ,#{bno} )
 	</update>
 	<update id="updateViewCount">
 		update tbl_board set
 		view_count = view_count + 1
-		where bno = #{bno}
+		where
+		bno = #{bno}
 	</update>
 	<!-- 게시판과 연관된 댓글 삭제 -->
 	<delete id="deleteBoardReply">
 		delete from tbl_reply where bno = #{bno}
+	</delete>
+	<select id="selectBoardType" resultType="org.edu.vo.BoardTypeVO">
+		select * from
+		tbl_board_type
+		order by bod_sun asc
+	</select>
+	<insert id="insertBoardType">
+		insert into tbl_board_type
+		(bod_type,bod_name,bod_sun)
+		values (#{bod_type}, #{bod_name} , #{bod_sun}
+	</insert>
+
+	<update id="updateBoardType">
+		update tbl_board_type set
+		bod_name  =  #{bod_name},
+		bod_sun     = #{bod_sun}
+		where bod_type =#{bod_type}
+	</update>
+
+	<delete id="deleteBoardType">
+		delete  from tbl_board_type 
+		where bod_type =#{bod_type}
 	</delete>
 </mapper>
