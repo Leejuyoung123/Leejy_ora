@@ -114,4 +114,9 @@ public class BoardDAOImpl implements IF_BoardDAO {
 		sqlSession.delete(mapperQuery+ ".deleteBoardType" , bod_type);
 	}
 
+	@Override
+	public BoardTypeVO viewBoardType(String bod_type) throws Exception {
+		return sqlSession.selectOne(mapperQuery+".viewBoardType",bod_type);
+	}
+
 }

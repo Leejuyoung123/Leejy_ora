@@ -53,8 +53,74 @@ public class AdminController {
 	private IF_MemberService memberService;
 	@Inject
 	private FileDataUtil fileDataUtil;
+	/**
+	 * 게시판 생성  write 입니다
+	 */
+	@RequestMapping(value = "/bodtype/write", method = RequestMethod.GET)
+	public String bodtypeWrite(Locale locale, Model model) throws Exception {
+		
+		return "admin/bodtype/bodtype_write";
+	}
+	/**
+	 * 게시판 생성  write 입니다
+	 *
+	 */
+	@RequestMapping(value = "/bodtype/write", method = RequestMethod.POST)
+	public String bodtypeWrite(BoardTypeVO boardTypeVO ,Locale locale, Model model , RedirectAttributes rdat) throws Exception {
+	
+		boardService.insertBoardType(boardTypeVO);
+		rdat.addFlashAttribute("msg","입력");
+		return "redirect:/admin/bodtype/list";
+	}
 	
 	
+	
+	/**
+	 * 게시판 생성  수정 입니다
+	 * @param locale
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/bodtype/update", method = RequestMethod.GET)
+	public String bodtypeUpdate( @RequestParam ("bod_type") String bod_type,Locale locale, Model model) throws Exception {
+		BoardTypeVO boardTypeVO = boardService.viewBoardType(bod_type);
+		// BoardTypeVO boardTypeVO = (BoardTypeVO) boardService.selectBoardType();
+		model.addAttribute("boardTypeVO",boardTypeVO);
+		/* List<*BoardTypeVO> list > jsp 쪽 boardTypeList; 이 데이터가 아래처럼 구성.
+		 * [ { 'notice','공지사항',1},
+		 */
+		return "admin/bodtype/bodtype_update";
+	}
+	/**
+	 * 게시판 생성  수정 입니다
+	 * @param locale
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/bodtype/update", method = RequestMethod.POST)
+	public String bodtypeUpdate(BoardTypeVO boardTypeVO ,Locale locale, Model model , RedirectAttributes rdat) throws Exception {
+	
+		boardService.updateBoardType(boardTypeVO);
+		rdat.addFlashAttribute("msg","수정");
+		return "redirect:/admin/bodtype/list";
+	}
+	/**
+	 * 게시판 생성  삭제 입니다
+	 * @param locale
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/bodtype/delete", method = RequestMethod.POST)
+	public String bodTypeDelete(BoardTypeVO boardTypeVO ,Locale locale, Model model , RedirectAttributes rdat) throws Exception {
+	
+		boardService.deleteBoardType(boardTypeVO.getBod_type());
+		rdat.addFlashAttribute("msg","삭제");
+		return "redirect:/admin/bodtype/list";
+	}
+
 	/**
 	 * 게시판 생성 리스트 입니다.
 	 * 
@@ -64,6 +130,10 @@ public class AdminController {
 	public String bodtypeList( Locale locale, Model model) throws Exception {
 		List<BoardTypeVO> list = boardService.selectBoardType();
 		model.addAttribute("boardTypeList",list);
+		/* List<*BoardTypeVO> list > jsp 쪽 boardTypeList; 이 데이터가 아래처럼 구성.
+		 * [ { 'notice','공지사항',1},
+		 * { 'gallery','커뮤니티',2} ]
+		 */
 		return "admin/bodtype/bodtype_list";
 	}
 

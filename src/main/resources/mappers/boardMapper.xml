@@ -132,15 +132,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteBoardReply">
 		delete from tbl_reply where bno = #{bno}
 	</delete>
+	
+	<select id="viewBoardType" resultType="org.edu.vo.BoardTypeVO">
+				select * from tbl_board_type where bod_type = #{bod_type}	
+	</select>
+
 	<select id="selectBoardType" resultType="org.edu.vo.BoardTypeVO">
 		select * from
 		tbl_board_type
 		order by bod_sun asc
 	</select>
 	<insert id="insertBoardType">
-		insert into tbl_board_type
+		insert into tbl_board_type 
 		(bod_type,bod_name,bod_sun)
-		values (#{bod_type}, #{bod_name} , #{bod_sun}
+		values (#{bod_type}, #{bod_name} , #{bod_sun} )
 	</insert>
 
 	<update id="updateBoardType">

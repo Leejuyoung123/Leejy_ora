@@ -110,16 +110,22 @@ if('${msg}'  !=  ""){
 									<p>회원관리</p>
 								</a></li>
 							
-						
+								<li class="nav-item">
+								<a href="/admin/bodtype/list" class="nav-link "> 
+									<i class="far fa-circle nav-icon"></i>
+									<p>게시판 생성</p>
+								</a>
+								</li>
 							
 							<li class="nav-item has-treeview menu-open">
 								<li class="nav-item">
 								<a href="#"class="nav-link"> 
 								<i class="far fa-circle nav-icon"></i>
 									<p>
-										게시판관리	<i class="right fas fa-angle-left"></i>
+										게시판 관리<i class="right fas fa-angle-left"></i>
 									</p>
 								</a>
+								
 							
 							<ul class="nav nav-treeview">
 								<c:forEach items ="${boardTypeMenu}" var="boardTypeMenu" >

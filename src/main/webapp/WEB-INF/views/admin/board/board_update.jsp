@@ -35,6 +35,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
+					
 						<form role="form" action="/admin/board/update" method="post" encType="multipart/form-data">
 							<div class="row">
 								<div class="col-sm-12">
@@ -43,8 +44,9 @@
 									<label>게시판 선택</label> 
 									<select name="bod_type" class="form-control" required>
 										<option value="">게시판선택</option>
-										<option value="notice"<c:out value="${(boardVO.bod_type eq 'notice')?('selected'):('')}"/>>공지사항</option>
-										<option value="gallery"<c:out value="${(boardVO.bod_type eq 'gallery')?('selected'):('')}"/>>갤러리</option>
+										<c:forEach items="${boardTypeMenu}" var ="boardTypeMenu" >
+											<option value="${boardTypeMenu.bod_type}" <c:out value ="${(boardVO.bod_type  eq boardTypeMenu.bod_type)?('selected'):('')}"/>>${boardTypeMenu.bod_name}</option>
+										</c:forEach>
 									</select>
 								</div>
 								</div>
@@ -85,6 +87,7 @@
 							<button type="submit" class="btn btn-warning">Submit</button>
 							<a href="/admin/board/list?page=${pagVO.page}" class="btn btn-primary">List All</a>
 						</form>
+					
 					</div>
 					<!-- card body -->
 				</div>

@@ -7,6 +7,7 @@ import org.edu.vo.BoardVO;
 import org.edu.vo.PageVO;
 
 public interface IF_BoardService  {
+	 public BoardTypeVO viewBoardType (String bod_type) throws Exception;
 	 public void deleteBoardType(String bod_type) throws Exception;
 	 public void updateBoardType(BoardTypeVO boardTypeVO) throws Exception;
 	 public void insertBoardType(BoardTypeVO boardTypeVO) throws Exception;

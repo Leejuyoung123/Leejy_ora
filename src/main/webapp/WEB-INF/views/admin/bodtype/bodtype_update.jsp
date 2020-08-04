@@ -46,30 +46,48 @@
 			</div>
 			<!-- /.card-header -->
 			<div class="card-body table-responsive p-0">
-				<table class="table table-hover text-nowrap">
-					<thead>
-						<tr>
-							<th>bod_sun</th>
-							<th>bod_type</th>
-							<th>bod_name</th>
-					</thead>
-					<tbody>
-						<c:forEach items="${boardTypeList}" var="boardTypeVO" varStatus="status">
-							<tr>
-								<td>${boardTypeVO.bod_sun}</td>
-								<td><a
-									href="/admin/bodtype/update?bod_type=${boardTypeVO.bod_type}">${boardTypeVO.bod_type}</a></td>
-								<td>${boardTypeVO.bod_name}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-					<td>	 <a href="/admin/bodtype/write" class="btn btn-primary">게시판 생성</a> </td>
 				
-				</table>
-			</div>
-			<!-- /.card-body -->
+					<form role="form" action="/admin/bodtype/update" method="post" >
+							<div class="row">
+									<!-- text input -->
+									<div class="col-sm-12">
+										<div class="form-group">
+												<label>보드 타입</label>
+												${boardTypeVO.bod_type}
+											 <input  value="${boardTypeVO.bod_type}" type="hidden"
+												name="bod_type" class="form-control" 
+												placeholder="게시판 타입을 입력해 주세요">
+										</div>
+										</div>
+										<div class="col-sm-12">
+										<div class="form-group">
+												<label>보드 네임</label>
+											 <input  value="${boardTypeVO.bod_name}" type="text"
+												name="bod_name" class="form-control" 
+												placeholder="게시판 이름을 입력해 주세요">
+										</div>
+										</div>
+										<div class="col-sm-12">
+										<div class="form-group">
+												<label>출력 순서</label>
+											 <input  value="${boardTypeVO.bod_sun}" type="text"
+												name="bod_sun" class="form-control" 
+												placeholder="출력순서는 숫자로 입력해 주세요">
+										</div>
+										</div>
+										<div class="row">
+										<div class="form-group">
+										<div class="buttons">
+												<button type="submit" class="btn btn-warning">submit</button>
+												<a href="/admin/bodtype/list" class="btn btn-primary">List ALL</a>
+										</div>
+										</div>
+										
+										</div>
+						<!-- /.card-body -->
 		</div>
-		<!-- /.card -->
+		<!-- row -->
+		</form>
 	</div>
 
 

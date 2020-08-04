@@ -90,4 +90,9 @@ public class BoardServiceImpl implements IF_BoardService {
 	public void insertBoardType(BoardTypeVO boardTypeVO) throws Exception {
 		boardDAO.insertBoardType(boardTypeVO);
 	}
+
+	@Override
+	public BoardTypeVO viewBoardType(String bod_type) throws Exception {
+		return boardDAO.viewBoardType(bod_type);
+	}
 }
