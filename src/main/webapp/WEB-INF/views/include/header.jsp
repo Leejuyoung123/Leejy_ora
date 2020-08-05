@@ -43,14 +43,14 @@ if('${msg}'  !=  ""){
 			<c:when test="${session_enabled eq 'true' }">
 					<li><span style="color:white">${session_username}님[${session_userid}]환영합니다!</span></li>
 					<li><a href="/logout">로그아웃</a></li>
-					
+					 <li><a href="/mypage/update">마이페이지</a>
 					<c:if test="${session_levels eq 'ROLE_ADMIN'}">
 						   <li><a href="/admin">관리자</a></li>		
 					</c:if>
 			</c:when>	
 			<c:otherwise>
 					<li><a href="/login">로그인</a></li>
-					<li><a href="#">회원가입</a></li>
+					<li><a href="/mypage/insert">회원가입</a></li>
 			</c:otherwise>	
 		</c:choose>
 		</ul>

@@ -40,13 +40,14 @@
 									<!-- text input -->
 									<div class="form-group">
 										<h3>CREATE Member</h3>
-										<label>user_id</label> <input name="user_id" type="text"
+										<label>user_id</label> <input required id="user_id" name="user_id" type="text"
 											class="form-control" placeholder="Enter user_id">
 									</div>
+									<span id="msg_validation"></span>
 								</div>
 								<div class="col-sm-12">
 									<div class="form-group">
-										<label>user_pw</label> <input name="user_pw" type="text"
+										<label>user_pw</label> <input required name="user_pw" type="text"
 											class="form-control" placeholder="Enter user_pw">
 									</div>
 								</div>
@@ -55,7 +56,7 @@
 								<div class="col-sm-12">
 									<!-- textarea -->
 									<div class="form-group">
-										<label>user_name</label> <input name="user_name" type="text"
+										<label>user_name</label> <input  required name="user_name" type="text"
 											class="form-control" placeholder="Enter user_name">
 									</div>
 								</div>
@@ -92,7 +93,7 @@
 									<hr>
 									<!-- //줄바꿈
              		// 수평선 -->
-									<button type="submit" class="btn btn-warning">Submit</button>
+									<button  disabled id="btn_submit" type="submit" class="btn btn-warning">Submit</button>
 									<a href="/admin/member/list?page=${pageVO.page}" class="btn btn-primary">List
 										All</a>
 								</div>
@@ -112,4 +113,29 @@
 	<!-- Content Header (Page header) -->
 </div>
 <!-- Content Wrapper. Contains page content -->
+<script> 
+$(document).ready(function(){
+	 $("#user_id").blur(function() {
+			 var user_id  = $(this).val(); 
+			$.ajax({
+				type:'get',
+				url:'/admin/member/idcheck?user_id=' + user_id,
+				success:function (result) {
+					if(result == '1'){
+							$("#msg_validation").text("기존 사용자 아이디가 존재합니다. 다른 아이디를 입력해 주세요!");
+							$("#msg_validation").css({"color":"red","font-size":"14px"});
+							$("#btn_submit").attr("disabled",true);
+						}else{
+							$("#msg_validation").text("사용 가능한 아이디 입니다");
+							$("#msg_validation").css({"color":"red","font-size":"14px"});
+							$("#btn_submit").attr("disabled",false);
+						}
+				},
+				error:function(){
+					alert("중복 아이디 체크 RestAPI 서버가 정상작동하지 않습니다.");
+				}
+			}); 
+	 });
+});
+</script>
 <%@ include file="../include/footer.jsp"%>

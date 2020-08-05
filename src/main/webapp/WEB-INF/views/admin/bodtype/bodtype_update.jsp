@@ -47,7 +47,7 @@
 			<!-- /.card-header -->
 			<div class="card-body table-responsive p-0">
 				
-					<form role="form" action="/admin/bodtype/update" method="post" >
+					<form id="form_bodtype" role="form" action="/admin/bodtype/update" method="post" >
 							<div class="row">
 									<!-- text input -->
 									<div class="col-sm-12">
@@ -75,11 +75,12 @@
 												placeholder="출력순서는 숫자로 입력해 주세요">
 										</div>
 										</div>
-										<div class="row">
+										<div class="col-sm-12">
 										<div class="form-group">
 										<div class="buttons">
 												<button type="submit" class="btn btn-warning">submit</button>
-												<a href="/admin/bodtype/list" class="btn btn-primary">List ALL</a>
+												<a href="#"  id="btn_delete" class="btn btn-danger">DELETE</a>
+												<a href="/admin/bodtype/list" class="btn btn-primary">List ALL</a>	
 										</div>
 										</div>
 										
@@ -93,4 +94,15 @@
 
 </div>
 <!-- ./Content Wrapper. Contains page content -->
+<script>
+$(document).ready(function(){
+ 	$("#btn_delete").click(function(){
+ 		if(confirm("정말로 삭제하시겠습니까?")) {
+ 			$("#form_bodtype").attr("action","/admin/bodtype/delete");
+ 	 		$("#form_bodtype").submit();
+ 		}
+ 		
+ 	});
+});
+</script>
 <%@ include file="../include/footer.jsp"%>

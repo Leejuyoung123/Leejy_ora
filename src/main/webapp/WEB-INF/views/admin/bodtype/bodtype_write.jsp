@@ -24,8 +24,8 @@
 			<!-- /.row -->
 		</div>
 		<!-- /.container-fluid -->
-		
-</div>
+
+	</div>
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
@@ -46,52 +46,81 @@
 			</div>
 			<!-- /.card-header -->
 			<div class="card-body table-responsive p-0">
-				
-					<form role="form" action="/admin/bodtype/write" method="post" >
-							<div class="row">
-									<!-- text input -->
-									<div class="col-sm-12">
-										<div class="form-group">
-												<label>보드 타입</label>
-											 <input  value="${boardTypeVO.bod_type}" type="text"
-												name="bod_type" class="form-control" 
-												placeholder="게시판 타입을 입력해 주세요" required>
-										</div>
-										</div>
-											<div class="col-sm-12">
-										<div class="form-group">
-												<label>보드 네임</label>
-											 <input  value="${boardTypeVO.bod_name}" type="text"
-												name="bod_name" class="form-control" 
-												placeholder="게시판 이름을 입력해 주세요">
-										</div>
-										</div>
-										<div class="col-sm-12">
-										<div class="form-group">
-												<label>출력 순서</label>
-											 <input  value="${boardTypeVO.bod_sun}" type="text"
-												name="bod_sun" class="form-control" 
-												placeholder="0">
-										</div>
-										</div>
-										</div>
-										<div class="row">
-										<div class="form-group">
-										<div class="buttons">
-												<button type="submit" class="btn btn-warning">submit</button>
-												<a href="/admin/bodtype/list" class="btn btn-primary">List ALL</a>
-										</div>
-										</div>
-										
-										</div>
-						<!-- /.card-body -->
-		</form>
+
+				<form role="form" action="/admin/bodtype/write" method="post">
+					<div class="row">
+						<!-- text input -->
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>보드 타입</label> <input id="bod_type"
+									value="${boardTypeVO.bod_type}" type="text" name="bod_type"
+									class="form-control" placeholder="게시판 타입을 입력해 주세요" required>
+							</div>
+							<span id="msg_validation"></span>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>보드 네임</label> <input value="${boardTypeVO.bod_name}"
+									type="text" name="bod_name" class="form-control"
+									placeholder="게시판 이름을 입력해 주세요">
+							</div>
+							
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>출력 순서</label> <input value="${boardTypeVO.bod_sun}"
+									type="text" name="bod_sun" class="form-control" placeholder="0">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<div class="buttons">
+								<button disabled id="submit_check" type="submit"
+									class="btn btn-warning">submit</button>
+								<a href="/admin/bodtype/list" class="btn btn-primary">List
+									ALL</a>
+							</div>
+						</div>
+
+					</div>
+					<!-- /.card-body -->
+				</form>
+			</div>
+			<!-- row -->
+
 		</div>
-		<!-- row -->
-		
+
+
 	</div>
-
-
-</div>
-<!-- ./Content Wrapper. Contains page content -->
-<%@ include file="../include/footer.jsp"%>
+	<script>
+		$(document).ready(function() {
+			//.focus()초점 <-> .blur()흐리게
+			$("#bod_type").blur(function() {
+				var bod_type = $("#bod_type").val();
+				//Ajax => Asyn비동기 Javascript And Xml(Json제이슨-key:value)
+				$.ajax({
+					type : 'get',
+					url : '/admin/bodtype/bodtype_check?bod_type=' + bod_type,
+					success : function(result) {
+						//alert(result);//디버그용
+						if (result == '1') {
+							$("#msg_validation").text("기존 게시판이 존재 합니다")
+							$("#msg_validation").css({"color":"red","font-size":"14px"});
+							//alert('기존 게시판이 존재합니다.');
+							$("#submit_check").attr("disabled", true);
+							
+						} else {
+							$("#msg_validation").text("사용 가능한 게시판 입니다.");
+							$("#submit_check").attr("disabled", false);
+						}
+					},
+					error : function() {
+						alert("RestAPI서버에서 에러가 발생되었습니다.");
+					}
+				});
+			});
+		});
+	</script>
+	<!-- ./Content Wrapper. Contains page content -->
+	<%@ include file="../include/footer.jsp"%>

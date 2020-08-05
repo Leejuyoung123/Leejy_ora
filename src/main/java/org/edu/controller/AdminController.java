@@ -2,38 +2,32 @@ package org.edu.controller;
 // EL (Express language) = ${boardVO.title}
 // JSTL (java Standard Tag Library) = <c:out value="${boardVO.title} /> 보안 떄문에
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.edu.service.IF_BoardService;
 import org.edu.service.IF_MemberService;
+import org.edu.util.FileDataUtil;
 import org.edu.vo.BoardTypeVO;
 import org.edu.vo.BoardVO;
 import org.edu.vo.MemberVO;
 import org.edu.vo.PageVO;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.edu.util.*;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -53,6 +47,38 @@ public class AdminController {
 	private IF_MemberService memberService;
 	@Inject
 	private FileDataUtil fileDataUtil;
+	
+	
+	/**
+	 * 회원 아이디 체크 RestAPI입니다
+	 */
+	@RequestMapping(value = "/member/idcheck", method = RequestMethod.GET)
+	@ResponseBody 
+	// ResponseBody 데이터만  리턴 
+	public int idCheck(@RequestParam("user_id")String user_id) throws Exception {
+		MemberVO memberVO = memberService.viewMember(user_id);
+		int check=0;
+		if(memberVO !=null) {
+			check=1;
+		}
+		return check;
+	}
+	
+	/**
+	 * 게시판 아이디 체크 RestAPI입니다
+	 */
+	@RequestMapping(value = "/bodtype/bodtype_check", method = RequestMethod.GET)
+	@ResponseBody 
+	// ResponseBody 데이터만  리턴 
+	public int bodTypeCheck(@RequestParam("bod_type")String bod_type) throws Exception {
+		BoardTypeVO boardTypeVO = boardService.viewBoardType(bod_type);
+		int check=0;
+		if(boardTypeVO!=null) {
+			check=1;
+		}
+		return check;
+	}
+	
 	/**
 	 * 게시판 생성  write 입니다
 	 */
