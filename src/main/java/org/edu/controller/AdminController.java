@@ -52,6 +52,7 @@ public class AdminController {
 	/**
 	 * 회원 아이디 체크 RestAPI입니다
 	 */
+	// 스프링 시큐리티에서 회원가입할떄 ID중복값을 체크하는 권한이 생김
 	@RequestMapping(value = "/member/idcheck", method = RequestMethod.GET)
 	@ResponseBody 
 	// ResponseBody 데이터만  리턴 

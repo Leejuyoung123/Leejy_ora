@@ -81,10 +81,10 @@ public class HomeController {
 	 * 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/member/insert", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/insert", method = RequestMethod.GET)
 	public String memberWrite(Locale locale, Model model) throws Exception {
 
-		return "member/mypage_insert";
+		return "mypage/mypage_insert";
 	}
 
 	@RequestMapping(value = "/mypage/insert", method = RequestMethod.POST)
@@ -116,7 +116,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/mypage/update", method = RequestMethod.POST)
-	public String memberUpdate(MemberVO memberVO, Locale locale, RedirectAttributes rdat) throws Exception {
+	public String memberUpdate(HttpServletRequest request,MemberVO memberVO, Locale locale, RedirectAttributes rdat) throws Exception {
 		String new_pw = memberVO.getUser_pw(); // 수정 전 1234 > 암호화처리 set으로 집어넣음
 		if (new_pw != "") {
 			// 스프링 시큐리티 4.x BCryptPasswordEncoder 암호사용 내장클래스
@@ -125,9 +125,15 @@ public class HomeController {
 			memberVO.setUser_pw(bcryptPassword); // DB에 들어가지전 값을 set 시킴
 		}
 		memberService.updateMember(memberVO);
+		
 		rdat.addFlashAttribute("msg", "회원정보 수정");
+		// 회원이름 세션변수 변경처리 session_username
+		HttpSession  session = request.getSession();
+		session.setAttribute("session_username", memberVO.getUser_name());
+		
+		
 		return "redirect:/mypage/update";
-
+		
 	}
 
 	/**
