@@ -6,6 +6,7 @@ import org.edu.vo.MemberVO;
 import org.edu.vo.PageVO;
 
 public interface IF_MemberDAO {
+		 public List<MemberVO> testJobMethod() throws Exception;
 		 public void insertMember(MemberVO memberVO) throws Exception;
 		 public List<MemberVO> selectMember(PageVO pageVO)throws Exception;
 		 public void updateMember(MemberVO memberVO) throws Exception;

@@ -52,8 +52,14 @@ public class FileDataUtil {
 	public byte[] imagePreview(@RequestParam("filename") String fileName, HttpServletResponse response) throws IOException {
 		FileInputStream fis = null;//변수초기화
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();//인스턴스 변수생성
-		fis = new FileInputStream(uploadPath + "/" + fileName);
+		fis = new FileInputStream(uploadPath + "/" + fileName); 
+		//생성자는 여러 타입의 매개변수를 받지만 공통적으로 파일의 주소와 이름의 정보를 가진 객체를 받아 해당 파일과의 입력 스트림을 생성합니다.
 		int readCount = 0;
+		/*모두 현재 파일 포인터 위치를 기준으로 함 (파일 포인터 앞의 내용은 없는 것처럼 작동)
+		int read() : 1byte씩 내용을 읽어 정수로 반환
+		int read(byte[] b) : 파일 내용을 한번에 모두 읽어서 배열에 저장
+		int read(byte[] b. int off, int len) : 'len'길이만큼만 읽어서 배열의 'off'번째 위치부터 저장*/
+		
 		byte[] buffer = new byte[1024];
 		byte[] fileArray = null;
 		while((readCount = fis.read(buffer)) != -1) {

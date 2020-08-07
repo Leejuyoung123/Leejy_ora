@@ -11,25 +11,20 @@
 			<ul class="viewImgList">
 				<li class="imglist0">
 					<div class="roll_content">
-						<a href="/resources/home/javascript:;"> <img
-							src="/resources/home/img/img_slidecontents01.png"
-							alt="OOOO OOOOO OOOO OOOOO, 스프링... OOOO OOOOO?"></a>
+						<a href="/resources/home/javascript:;"></a>
 						<p class="roll_txtline">OOOO OOOOOOOOO OOOOOOOOO OOOOO</p>
 					</div>
 				</li>
 				<li class="imglist1">
 					<div class="roll_content">
-						<a href="/resources/home/javascript:;"> <img
-							src="/resources/home/img/img_slidecontents02.png"
-							alt="OOOO OOOOOOOOO OOOOO 스프링정보, 스프링... OOOO OOOOO?"></a>
+						<a href="/resources/home/javascript:;"></a>
+					
 						<p class="roll_txtline">OOOO OOOOOOOOO OOOOOOOOO OOOOO</p>
 					</div>
 				</li>
 				<li class="imglist2">
 					<div class="roll_content">
-						<a href="/resources/home/javascript:;"> <img
-							src="/resources/home/img/img_slidecontents03.png"
-							alt="OOOO OOOOO 믿을 수 있는 스프링정보, 스프링... OOOO OOOOO?"></a>
+						<a href="/resources/home/javascript:;"></a>
 						<p class="roll_txtline">OOOO OOOOOOOOO OOOOOOOOO OOOOO</p>
 					</div>
 				</li>
